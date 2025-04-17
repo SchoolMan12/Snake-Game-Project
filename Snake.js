@@ -100,3 +100,5 @@ document.addEventListener("keydown", (event) => {
             break;
     }
 });
+
+setInterval(updateGame, 100); // Add game loop

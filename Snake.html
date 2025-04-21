@@ -1,14 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
-<link rel="stylesheet" href="Snake.css">
+    <link rel="stylesheet" href="Snake.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Snake Game Project</title>
 </head>
+
 <body>
     <canvas id="snakeCanvas" width="600" height="600"></canvas>
     <script src="Snake.js"></script>
+    <div class="info">
+        <div class="section">difficulty <div id="difficulty"></div>
+        </div>
+        <div>direction <div id="direction"></div>
+        </div>
+        <div>start <div id="start"></div>
+        </div>
+        <div>point <div id="point"></div>
+        </div>
+        <div><button onclick="begingame()">start</button></div>
+        <div><button onclick="setdifficulty(300)">easy</button>
+            <button onclick="setdifficulty(200)">normal</button>
+            <button onclick="setdifficulty(100)">hard</button>
+        </div>
+    </div>
 </body>
+
 </html>

@@ -13,16 +13,18 @@
     <canvas id="snakeCanvas" width="600" height="600"></canvas>
     <script src="Snake.js"></script>
     <div class="info">
-        <div class="section">difficulty <div id="difficulty"></div>
+        <div class="section">Difficulty: <div id="difficulty"></div>
         </div>
-        <div>direction <div id="direction"></div>
+        <div class="section">Direction: <div id="direction"></div> 
         </div>
-        <div>start <div id="start"></div>
+        <div class="section">Game Status: <div id="start">Game is running</div>
         </div>
-        <div>point <div id="point"></div>
+        <div class="section">Points: <div id="point"></div>
         </div>
-        <div><button onclick="begingame()">start</button></div>
-        <div><button onclick="setdifficulty(300)">easy</button>
+        <div class="section">High Score: <div id="highscore"></div>
+        </div>
+        <div class="section"><button onclick="begingame()">start</button></div>
+        <div class="section"><button onclick="setdifficulty(300)">easy</button>
             <button onclick="setdifficulty(200)">normal</button>
             <button onclick="setdifficulty(100)">hard</button>
         </div>

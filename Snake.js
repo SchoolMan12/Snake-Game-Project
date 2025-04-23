@@ -1,3 +1,6 @@
+//The variable declarations for the project
+let points =0;
+let highscore =0;
 const canvas = document.getElementById("snakeCanvas");
 const ctx = canvas.getContext("2d");
 const tileSize = 20;
@@ -9,31 +12,33 @@ let food = { x: 10, y: 10 };
 let direction = "right";
 let difficulty =100;
 var interval;
-
+//This function draws the board, I added stroke lines to give the board a grid
 function drawBoard() {
     ctx.strokeStyle = "#dddddd";
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     for (let i = 0; i < gridSize; i++) {
         for (let j = 0; j < gridSize; j++) {
     ctx.strokeRect( i * tileSize, j * tileSize, tileSize, tileSize);}   
-      }
+      } 
 }
+//This function draws the snake, changed the color of the snake to light blue
 function drawSnake() {
     ctx.fillStyle = "#33ccff";
     snake.forEach(segment => {
         ctx.fillRect(segment.x * tileSize, segment.y * tileSize, tileSize, tileSize);
     });
 }
-
+//This draws the food
 function drawFood() {
     ctx.fillStyle = "red";
     ctx.fillRect(food.x * tileSize, food.y * tileSize, tileSize, tileSize);
 
 }
-
+//This moves the snake, stored and displayed the direction for the user to see
 function moveSnake() {
     const head = { ...snake[0] };
-console.log (direction)
+    const log = document.getElementById("direction");
+        log.innerHTML = direction;
     switch (direction) {
         case "up":
             head.y--;
@@ -53,19 +58,19 @@ console.log (direction)
     snake.unshift(head);
 
     if (head.x === food.x && head.y === food.y) {
-        generateFood();
+        generateFood(); points ++;
     } else {
         snake.pop();
     }
 }
-
+//This generates a new piece of food
 function generateFood() {
     food = {
         x: Math.floor(Math.random() * gridSize),
         y: Math.floor(Math.random() * gridSize)
     };
 }
-
+//This checks to see if the head of the snake ran into its body or if it went out of bounds
 function checkCollisions() {
     const head = snake[0];
 
@@ -79,16 +84,23 @@ function checkCollisions() {
         }
     }
 }
-
+//This shows the end stats of a lost run
 function resetGame() {
-    //alert("Game over! Restarting...");
     const log = document.getElementById("start");
     log.innerHTML = "You lose";
     isrunning = false;
     snake = [{ x: 5, y: 5 }];
     direction = "right";
+    //Your calculating to see if your current score beat the highschore
+    if (highscore < points) {
+    highscore = points    
+    }
+    
     generateFood();
+    const h = document.getElementById("highscore");
+    h.innerHTML = highscore;
 }
+//This takes the difficulty as a number and takes it as a string 
 function getdifficultyname() {
     if (difficulty == 100)
         return "hard"
@@ -97,6 +109,7 @@ function getdifficultyname() {
     if (difficulty == 300)
         return "easy"
 }
+//This runs the functions for the game
 function updateGame() {
     if (isrunning == false) return;
     const log = document.getElementById("difficulty");
@@ -106,21 +119,25 @@ function updateGame() {
     drawFood();
     moveSnake();
     checkCollisions();
+    const p = document.getElementById("point");
+    p.innerHTML = points;
 }
-
+//This starts the game
 function begingame() {
     isrunning = true;
+    const log = document.getElementById("start");
+    log.innerHTML = "Game is running";
+    points=0;
 }
-
+//This allows changing the difficulty
 function setdifficulty(speed) {
     difficulty = speed; 
     clearInterval(interval);
     interval = setInterval(updateGame, difficulty);
 }
-
+//This allows you to control the snake
 document.addEventListener("keydown", (event) => {
-    const log = document.getElementById("direction");
-        log.innerHTML = event.key;
+
     switch (event.key) {
         case "ArrowUp":
             direction = "up";
@@ -136,5 +153,5 @@ document.addEventListener("keydown", (event) => {
             break;
     }
 });
-
-interval = setInterval(updateGame, difficulty); // Add game loop
+// This is the game loop
+interval = setInterval(updateGame, difficulty); 

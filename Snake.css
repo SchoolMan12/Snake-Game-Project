@@ -10,8 +10,12 @@ canvas {
     flex-direction: column;
     font-size: large;
     font-weight: medium;
+    max-width: 600px;
+    align-items: center;
+    gap: 6px;
 }
 
 .section {
     display: flex;
+    gap: 6px;
 }
